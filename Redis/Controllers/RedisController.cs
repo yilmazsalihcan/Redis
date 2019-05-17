@@ -14,20 +14,26 @@ namespace Redis.Controllers
         // GET: Redis
         public ActionResult Index()
         {
-            RedisEndpoint redisEndpoint = new RedisEndpoint("127.0.0.1",6379);
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddToRedis(string username,string password)
+        {
+            RedisEndpoint redisEndpoint = new RedisEndpoint("127.0.0.1", 6379);
             RedisClient client = new RedisClient(redisEndpoint);
             UserModel userModel = new UserModel()
             {
-                Username="Salih Can",
-                Email="aaa@aa.com",
-                Password="12345"
+                Username =username,
+                Email = "aaa@aa.com",
+                Password = password
             };
             var serialized = JsonConvert.SerializeObject(userModel);
             client.SetValue("UserInfo", serialized);
-            var getUserInfo =JsonConvert.DeserializeObject<UserModel>(client.GetValue("UserInfo"));
-            return View(getUserInfo);
+            var getUserInfo = JsonConvert.DeserializeObject<UserModel>(client.GetValue("UserInfo"));
+            Session["UserInfo"] = client.GetValue("UserInfo");
+            return Redirect("Index");
         }
-
 
 
 

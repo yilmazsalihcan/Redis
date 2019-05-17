@@ -5,3 +5,13 @@
 
 <h2>Index</h2>
 
+
+<div class="row">
+    @using (Html.BeginForm("AddToRedis", "Redis", FormMethod.Post))
+    {
+    <input type="text" name="username" placeholder="username" />
+    <input type="text" name="password" placeholder="password" />
+    <input type="submit" value="Kayıt Ol" />
+    }
+    <label>@Session["UserInfo"]</label>
+</div>
