@@ -21,6 +21,7 @@ namespace Redis.Controllers
         public ActionResult AddToRedis(string username,string password)
         {
             RedisEndpoint redisEndpoint = new RedisEndpoint("127.0.0.1", 6379);
+            redisEndpoint.Db =12; //Farklı database adreslerinde işlem yapabiliriz. Max 16 tane
             RedisClient client = new RedisClient(redisEndpoint);
             UserModel userModel = new UserModel()
             {
