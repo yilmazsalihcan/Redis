@@ -1,2 +1,2 @@
 # Redis
-This Repository includes Redis Example
+This repository includes redis example
